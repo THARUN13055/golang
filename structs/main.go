@@ -2,19 +2,33 @@ package main
 
 import "fmt"
 
+type FrontUser struct {
+	Name   string
+	Email  string
+	Status bool
+	Age    int
+
+}
+
+type BackUser struct {
+	Connect string
+	Tools string
+	Laungage string
+	Codeline int
+}
+
 func main() {
 	fmt.Println("struct in golang")
 
 	// go has no inheritance and super or parent
 
-	tharun := User{"tharun", "tharun@we323.go", true, 32}
-	fmt.Println(tharun)
+	tharun := FrontUser{"tharun", "tharun@we323.go", true, 32}
+     //fmt.Println(tharun)
 	fmt.Printf("name is %v,and email is %v", tharun.Name, tharun.Email)
+
+	backend := BackUser{"database","kubernetes","golang",4000}
+	//fmt.Println(backend)
+	fmt.Printf("connection: %v, tools: %v, Laungage: %v, codeline: %v", backend.Connect,backend.Tools,backend.Laungage,backend.Codeline)
 }
 
-type User struct {
-	Name   string
-	Email  string
-	Status bool
-	Age    int
-}
+

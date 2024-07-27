@@ -12,7 +12,7 @@ func main() {
 		Car  []string
 	}
 	p1 := &person{Name: "tharun", Age: 23, Car: []string{"tata", "audi"}}
-	data, _ := json.Marshal(p1)
+	data,_:= json.Marshal(p1)
 	fmt.Println(string(data))
 
 	data1:={"Name":"tharun","Age":23,"Car":["tata","audi"]}

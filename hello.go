@@ -1,332 +1,361 @@
-/*
+// //helloworld
 
-//helloworld
+// package main
 
-package main
+// import "fmt"
 
-import "fmt"
+// func main() {
+// 	helloname("this is hello world")
+// }
 
-func main() {
-	helloname("this is hello world")
-}
+// func helloname(say string) {
+// 	fmt.Println(say)
+// }
 
-func helloname(say string) {
-	fmt.Println(say)
-}
+// //variable
 
-//variable
+// package main
 
-package main
+// import "fmt"
 
-import "fmt"
+// func main() {
+// 	a := 4
+// 	fmt.Printf("%d", a)
+// }
 
-func main() {
-	a := 4
-	fmt.Printf("%d", a)
-}
+// //ifelse
 
-//ifelse
+// package main
 
-package main
+// import "fmt"
 
-import "fmt"
+// func main() {
 
-func main() {
+// 	var a int
 
-	var a int
+// 	fmt.Println("enter the number: ")
+// 	fmt.Scanf("%d", &a)
+// 	if a%2 == 0 {
+// 		fmt.Printf("%d is a even number", a)
 
-	fmt.Println("enter the number: ")
-	fmt.Scanf("%d", &a)
-	if a%2 == 0 {
-		fmt.Printf("%d is a even number", a)
+// 	} else {
+// 		fmt.Printf("%d is the odd number ", a)
+// 	}
+// }
 
-	} else {
-		fmt.Printf("%d is the odd number ", a)
-	}
-}
+// //ifelse
 
-//ifelse
+// package main
 
-package main
+// import "fmt"
 
-import "fmt"
+// func main() {
 
-func main() {
+// 	var a int
 
-	var a int
+// 	fmt.Printf("enter the number: ")
+// 	fmt.Scanf("%d", &a)
 
-	fmt.Printf("enter the number: ")
-	fmt.Scanf("%d", &a)
+// 	n := a / 2
 
-	n := a / 2
+// 	if a%2 == 0 {
+// 		fmt.Printf("%d is even , %d time it will divide", a, n)
 
-	if a%2 == 0 {
-		fmt.Printf("%d is even , %d time it will divide", a, n)
+// 	} else {
+// 		fmt.Printf("%d is odd,%d time it will divide", a, n)
+// 	}
+// }
 
-	} else {
-		fmt.Printf("%d is odd,%d time it will divide", a, n)
-	}
-}
+// // if else fizzbizz
 
-// if else fizzbizz
+// package main
 
-package main
+// import (
+// 	"fmt"
+// 	"strconv"
+// )
 
-import (
-	"fmt"
-	"strconv"
-)
+// func main() {
+// 	var num int
+// 	fmt.Printf("enter the number: ")
+// 	fmt.Scanf("%d", &num)
+// 	fmt.Printf("%s", fizzbizz(num))
 
-func main() {
-	var num int
-	fmt.Printf("enter the number: ")
-	fmt.Scanf("%d", &num)
-	fmt.Printf("%s", fizzbizz(num))
+// }
 
-}
+// func fizzbizz(n int) string {
+// 	if n%3 == 0 && n%5 == 0 {
+// 		return "fizzbizz"
+// 	} else if n%3 == 0 {
+// 		return "fizz"
+// 	} else if n%5 == 0 {
+// 		return "bizz"
+// 	}
+// 	return strconv.Itoa(n)
+// }
 
-func fizzbizz(n int) string {
-	if n%3 == 0 && n%5 == 0 {
-		return "fizzbizz"
-	} else if n%3 == 0 {
-		return "fizz"
-	} else if n%5 == 0 {
-		return "bizz"
-	}
-	return strconv.Itoa(n)
-}
+// package main
 
+// import (
+// 	"fmt"
+// )
+
+// func main() {
+// 	var n int
+// 	fmt.Printf("enter the number: ")
+// 	fmt.Scanf("%d", &n)
+// 	fmt.Printf("%s", secname(n))
+
+// }
+
+// func secname(s int) string {
+// 	if s%2 == 0 {
+// 		return "its correct"
+// 	} else {
+// 		return "its false"
+// 	}
+
+// }
+
+// package main
+
+// import "fmt"
+
+// func main() {
+// 	var a int
+// 	fmt.Printf("enter the number of watercane: ")
+// 	fmt.Scanf("%d", &a)
+// 	fmt.Printf("%s", watercane(a))
+
+// }
+// func watercane(a int) string {
+// 	if a > 50 {
+// 		return " this is over capacity"
+// 	} else {
+// 		return "this is medium capacity"
+// 	}
+// }
+
+// // Error messaging while no output given
+
+// package main
+
+// import (
+// 	"errors"
+// 	"fmt"
+// )
+
+// func main() {
+// 	var name string
+// 	fmt.Scan(&name)
+// 	message, err := hello(name)
+// 	if err != nil {
+// 		fmt.Print(err)
+// 		return
+// 	}
+// 	fmt.Println(message)
+// }
+
+// func hello(name string) (string, error) {
+// 	if name == "bass" {
+// 		return name, errors.New("empty name")
+// 	}
+// 	message := fmt.Sprintf("hi %v. welcome", name)
+// 	return message, nil
+// }
+
+// package main
+
+// import (
+// 	"bufio"
+// 	"fmt"
+// 	"os"
+// )
+
+// const prompt = "press enter to ready"
+
+// func main() {
+// 	fno := 2
+// 	sno := 5
+// 	tno := 7
+// 	var ans int
+
+// 	reader := bufio.NewReader(os.Stdin)
+
+// 	fmt.Println("guess the number 1 to 10", fno, prompt)
+// 	reader.ReadString('\n')
+// 	fmt.Println("subract the number", sno, prompt)
+// 	reader.ReadString('\n')
+// 	fmt.Println("divid the number", tno, prompt)
+// 	reader.ReadString('\n')
+
+// 	ans = fno*sno - tno
+
+// 	fmt.Println("the answer is ", ans)
+
+// }
+
+// package main
+
+// import (
+// 	"fmt"
+// )
+
+// func main() {
+// 	var a byte
+// 	fmt.Println("guess the name:(y/n) ")
+// 	fmt.Scanf("%c", &a)
+// 	// go doc unicode
+// 	// now we need to convert the rune (unicode character) but we are using byte which means we need to change as ASCII value
+// 	//a = byte(unicode.ToLower(rune(a)))
+// 	//a = byte(unicode.ToUpper(rune(a)))
+// 	switch a {
+// 	case 'y':
+// 		fmt.Println("thanks")
+// 	case 'n':
+// 		fmt.Println("no thanks")
+// 	default:
+// 		fmt.Println("bye")
+// 	}
+// }
 
-package main
+// package main
 
-import (
-	"fmt"
-)
+// import (
+// 	"fmt"
+// 	"strconv"
+// )
 
-func main() {
-	var n int
-	fmt.Printf("enter the number: ")
-	fmt.Scanf("%d", &n)
-	fmt.Printf("%s", secname(n))
+// func main() {
 
-}
+// 	binaryStr := "69"
 
-func secname(s int) string {
-	if s%2 == 0 {
-		return "its correct"
-	} else {
-		return "its false"
-	}
+// 	// Convert binary string to decimal integer
+// 	decimalValue, err := strconv.Atoi(binaryStr)
+// 	if err != nil {
+// 		fmt.Println("Error:", err)
+// 		return
+// 	}
 
-}
+// 	// Convert decimal value to ASCII character
+// 	asciiChar := byte(decimalValue)
 
+// 	// Print ASCII character
+// 	fmt.Printf("ASCII character for binary %s is %c\n", binaryStr, asciiChar)
+// }
 
-package main
+// package main
 
-import "fmt"
+// import (
+// 	"fmt"
+// 	"net/http"
+// )
 
-func main() {
-	var a int
-	fmt.Printf("enter the number of watercane: ")
-	fmt.Scanf("%d", &a)
-	fmt.Printf("%s", watercane(a))
+// func main() {
+// 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+// 		fmt.Fprint(w, "Hello, World!")
+// 	})
 
-}
-func watercane(a int) string {
-	if a > 50 {
-		return " this is over capacity"
-	} else {
-		return "this is medium capacity"
-	}
-}
+// 	err := http.ListenAndServe(":8080", nil)
+// 	if err != nil {
+// 		panic(err)
+// 	}
+// }
 
+// // here we are declearing the single function value
+// package main
 
-// Error messaging while no output given
+// import "fmt"
 
-package helloweb
+// func main() {
+// 	var a = "this is string"
 
-import (
-	"errors"
-	"fmt"
-)
+// 	fmt.Println(a)
+// 	myFunc()
+// }
+// func myFunc() {
+// 	var a = "this is also string!"
+// 	fmt.Println(a)
+// }
 
-func hello(name string) (string, error) {
-	if name == "tharun" {
-		return "", errors.New("empty name")
-	}
-	message := fmt.Sprintf("hi %v. welcome", name)
-	return message, nil
-}
+// package main
 
+// import "fmt"
 
-package main
+// // we can be used it for multi time
 
-import (
-	"bufio"
-	"fmt"
-	"os"
-)
+// var a = "this is apply for all"
 
-const prompt = "press enter to ready"
+// func myFunc() {
+// 	fmt.Println(a)
+// }
 
-func main() {
-	fno := 2
-	sno := 5
-	tno := 7
-	var ans int
+// func main() {
+// 	fmt.Println(a)
+// 	myFunc()
+// }
 
-	reader := bufio.NewReader(os.Stdin)
+// package main
 
-	fmt.Println("guess the number 1 to 10", fno, prompt)
-	reader.ReadString('\n')
-	fmt.Println("subract the number", sno, prompt)
-	reader.ReadString('\n')
-	fmt.Println("divid the number", tno, prompt)
-	reader.ReadString('\n')
+// import (
+// 	"paclageone"
+// )
 
-	ans = fno*sno - tno
+// var myVar = "this is package level variable"
 
-	fmt.Println("the answer is ", ans)
+// func main() {
 
-}
+// 	var blockVar = "this is block level variable"
 
+// 	paclageone.PrintMe(blockVar, myVar)
 
-package main
+// }
 
-import (
-	"fmt"
-)
+// //Pointer
 
-func main() {
-	var a byte
-	fmt.Println("guess the name:(y/n) ")
-	fmt.Scanf("%c", &a)
-	// go doc unicode
-	// now we need to convert the rune (unicode character) but we are using byte which means we need to change as ASCII value
-	//a = byte(unicode.ToLower(rune(a)))
-	//a = byte(unicode.ToUpper(rune(a)))
-	switch a {
-	case 'y':
-		fmt.Println("thanks")
-	case 'n':
-		fmt.Println("no thanks")
-	default:
-		fmt.Println("bye")
-	}
-}
+// // package main
 
+// // import "fmt"
 
+// // func main() {
 
+// // 	a := 30
 
-package main
+// // 	b := "string"
 
-import (
-	"fmt"
-	"net/http"
-)
+// // 	var Pointer = &a
 
-func main() {
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprint(w, "Hello, World!")
-	})
+// // 	var po = &b
 
-	err := http.ListenAndServe(":8080", nil)
-	if err != nil {
-		panic(err)
-	}
-}
+// // 	fmt.Println("int value:", *Pointer)
+// // 	fmt.Println("int  address:", Pointer)
+// // 	fmt.Println("--------------------")
+// // 	fmt.Println("string value", *po)
+// // 	fmt.Println("string address", po)
+// // }
 
+// //swapping of two strings
+// package main
 
+// import "fmt"
 
-// here we are declearing the single function value
-package main
+// func swap(x, y string) (string, string) {
+// 	return y, x
+// }
 
-import "fmt"
+// func main() {
+// 	a, b := swap("tharun", "kumar")
+// 	fmt.Println(a, b)
+// }
 
-func main() {
-	var a = "this is string"
+// package main
 
-	fmt.Println(a)
-	myFunc()
-}
-func myFunc() {
-	var a = "this is also string!"
-	fmt.Println(a)
-}
+// import "fmt"
 
+// func main(){
 
-
-package main
-
-import "fmt"
-
-// we can be used it for multi time
-
-var a = "this is apply for all"
-
-func myFunc() {
-	fmt.Println(a)
-}
-
-func main() {
-	fmt.Println(a)
-	myFunc()
-}
-
-
-
-
-package main
-
-import (
-	"paclageone"
-)
-
-var myVar = "this is package level variable"
-
-func main() {
-
-	var blockVar = "this is block level variable"
-
-	paclageone.PrintMe(blockVar, myVar)
-
-}
-
-//Pointer
-
-package main
-
-import "fmt"
-
-func main() {
-
-	a := 30
-
-	b := "string"
-
-	var Pointer = &a
-
-	var po = &b
-
-	fmt.Println("int value:", *Pointer)
-	fmt.Println("int  address:", Pointer)
-	fmt.Println("--------------------")
-	fmt.Println("string value", *po)
-	fmt.Println("string address", po)
-}
-
-
-//swapping of two strings
-package main
-
-import "fmt"
-
-func swap(x, y string) (string, string) {
-	return y, x
-}
-
-func main() {
-	a, b := swap("tharun", "kumar")
-	fmt.Println(a, b)
-}
-*/
+// 	var a int = 1
+// 	var c int = &a
+// 	fmt.Println("int value",a)
+// 	fmt.Println("add value",c)
+// }
