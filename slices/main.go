@@ -11,7 +11,7 @@ func main() {
 	fruittype = append(fruittype, "mango", "orange")
 	fmt.Println(fruittype)
 
-	fruittype = append(fruittype[1:3])
+	fruittype = fruittype[1:3]
 	fmt.Println(fruittype)
 
 	highscores := make([]int, 4)

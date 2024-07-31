@@ -29,6 +29,5 @@ func main() {
 	backend := BackUser{"database","kubernetes","golang",4000}
 	//fmt.Println(backend)
 	fmt.Printf("connection: %v, tools: %v, Laungage: %v, codeline: %v", backend.Connect,backend.Tools,backend.Laungage,backend.Codeline)
+	fmt.Printf("Name: %v, Email: %v, Status: %v, Age: %v", tharun.Name, tharun.Email, tharun.Status, tharun.Age)
 }
-
-

@@ -40,7 +40,7 @@ func main() {
 
 	}()
 
-	fmt.Println("press any key of the keyboard.Press esc to quit.")
+	fmt.Println("press any key of the keyboard. Press esc to quit.")
 	for {
 		char, key, err := keyboard.GetSingleKey()
 		if err != nil {

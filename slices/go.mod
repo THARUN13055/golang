@@ -1,3 +1,3 @@
-module slices
+module slice
 
 go 1.19
