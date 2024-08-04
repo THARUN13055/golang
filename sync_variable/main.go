@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"sync"
 )
-
+// actually lock and unlock is user for the changes which will not be occurs semiltaniously because here the example here i need to incress one and delete one if the go routine run parally it get error
 func main() {
 	var value int
 	value = 100000000
