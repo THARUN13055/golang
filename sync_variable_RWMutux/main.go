@@ -52,6 +52,7 @@ func main() {
 		}
 
 	}()
+	fmt.Println(value.balance)
 	go func() {
 		defer func() { done <- struct{}{} }()
 		err := value.Withdraw(400)
@@ -61,6 +62,7 @@ func main() {
 			fmt.Println("successfully withdraw 400")
 		}
 	}()
+	fmt.Println(value.balance)
 	go func() {
 		defer func() { done <- struct{}{} }()
 		value.deposit(500)
