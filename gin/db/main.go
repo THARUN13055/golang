@@ -16,7 +16,7 @@ var client *mongo.Client
 // Connect to MongoDB
 func connectDB() {
 	var err error
-	clientOptions := options.Client().ApplyURI("mongodb+srv://tharun:tharun@golang.vpv6p.mongodb.net/?retryWrites=true&w=majority&appName=golang") // Replace with your MongoDB connection string
+	clientOptions := options.Client().ApplyURI("mongodb+srv://tharun:tharun@golang.vpv6p.mongodb.net/?retryWrites=true&w=majority&appName=golang")
 	client, err = mongo.Connect(context.TODO(), clientOptions)
 	if err != nil {
 		log.Fatal(err)
@@ -45,7 +45,6 @@ func getAllCollections(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, gin.H{"collections": collections})
 }
-
 
 func main() {
 	// Connect to MongoDB
