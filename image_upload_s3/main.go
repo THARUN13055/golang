@@ -37,7 +37,7 @@ func main() {
 		log.Fatalf("region is not loading: %v", err)
 	}
 
-	svc := s3.NewFromConfig(cfg)
+  svc := s3.NewFromConfig(cfg)
 
 	// input := &s3.PutObjectInput{
 	// 	Bucket:      aws.String(os.Getenv("S3_BUCKET")),
@@ -111,7 +111,7 @@ func uploadfile(svc *s3.Client, client *mongo.Client, filepath string, s3filepat
 	fmt.Println("s3 images has been uploaded successfully")
 
 	// store metadata to mongodb collection
-	s3urlGenerate := fmt.Sprintf("https://%s.s3.%s.amazonaws.com/%s/%s", os.Getenv("S3_BUCKET"), os.Getenv("AWS_REGION"), s3filepath, filename)
+	//s3urlGenerate := fmt.Sprintf("https://%s.s3.%s.amazonaws.com/%s/%s", os.Getenv("S3_BUCKET"), os.Getenv("AWS_REGION"), s3filepath, filename)
 
 	collection := client.Database("tharun").Collection("images")
 	_, err = collection.InsertOne(context.TODO(), bson.M{
