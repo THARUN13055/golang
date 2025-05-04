@@ -17,5 +17,7 @@ func main() {
 		result = "bad"
 	}
 	fmt.Println(result)
-
+  fmt.Println("this is working")
 }
+
+

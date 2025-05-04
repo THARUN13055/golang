@@ -11,14 +11,22 @@ func main() {
 		Age  int
 		Car  []string
 	}
+
+	// Create a person instance and marshal it to JSON
 	p1 := &person{Name: "tharun", Age: 23, Car: []string{"tata", "audi"}}
-	data,_:= json.Marshal(p1)
+	data, err := json.Marshal(p1)
+	if err != nil {
+		fmt.Println("Error marshaling JSON:", err)
+		return
+	}
 	fmt.Println(string(data))
 
-	data1:={"Name":"tharun","Age":23,"Car":["tata","audi"]}
-
+	// Unmarshal the JSON data back into a new person instance
 	p2 := &person{}
-	json.Unmarshal([]byte(data1),p2)
+	err = json.Unmarshal(data, p2) // Use 'data' instead of 'data1'
+	if err != nil {
+		fmt.Println("Error unmarshaling JSON:", err)
+		return
+	}
 	fmt.Println(p2.Name)
-
 }
