@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"reflect"
 )
 
 type Jsonfile struct {
@@ -26,4 +27,5 @@ func main() {
 		panic(err)
 	}
 	fmt.Println(data)
+	fmt.Println(reflect.TypeOf(data))
 }

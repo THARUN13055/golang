@@ -7,97 +7,137 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/blackaichi/go-defectdojo/defectdojo"
+	"github.com/joho/godotenv"
+	"github.com/truemilk/go-defectdojo/defectdojo"
 )
 
-func main() {
-	url := "http://13.201.28.37:8080"
-	authorizedToken := "798b581a65f991dc728d2ae8745a77f6459078bc"
+type datas struct {
+	filePath          string
+	EngagementName    string
+	ScanType          string
+	version           string
+	github_buildId    string
+	github_branchTag  string
+	github_commitHash string
+	ProductName       string
+}
 
-	// Create DefectDojo client
-	dj, err := defectdojo.NewDojoClient(url, authorizedToken, nil)
-	if err != nil {
-		log.Fatalf("Failed to create DefectDojo client: %v", err)
-	}
-	cxt := context.Background()
-
-	// Fetch engagements
-	engagements, err := dj.Engagements.List(cxt, nil)
-	if err != nil {
-		log.Fatalf("Failed to retrieve engagements: %v", err)
-	}
-
-	if engagements.Results != nil {
-		for _, engagement := range *engagements.Results {
-			var id int
-			var name string
-
-			if engagement.Id != nil {
-				id = *engagement.Id
-			}
-
-			if engagement.Name != nil {
-				name = *engagement.Name
-			}
-			fmt.Printf("Engagement ID: %d, Name: %s\n", id, name)
-		}
-	} else {
-		fmt.Println("No engagements found")
-	}
-
+func files(filePath string) string {
 	cwd, err := os.Getwd()
 	if err != nil {
-		fmt.Printf("The error is %v\n", err)
-		return
+		log.Fatalf("The error is %v\n", err)
 	}
-
-	// Define the relative file path
-	filePath := "result/trivy_output.json"
 
 	// Join the current working directory with the file path
 	fullPath := filepath.Join(cwd, filePath)
 
-	// Check if the file exists
-	if _, err := os.Stat(fullPath); os.IsNotExist(err) {
-		log.Fatalf("File does not exist: %v", err)
-	}
+	return fullPath
+}
 
-	// Create ImportScan struct
-	importScan := &defectdojo.ImportScan{
+func importscan(data datas) defectdojo.ImportScan {
+	return defectdojo.ImportScan{
 		MinimumSeverity:   ptrString("Info"),
 		Active:            ptrBool(true),
 		Verified:          ptrBool(true),
-		File:              ptrString(filePath),
-		EngagementId:      ptrInt(17),
-		ScanType:          ptrString("Trivy Scan"),
+		File:              &data.filePath,
+		EngagementName:    &data.EngagementName,
+		ScanType:          &data.ScanType,
 		Environment:       ptrString("Development"),
 		AutoCreateContext: ptrBool(true),
-		ProductName:       ptrString("myproject"),
+		ProductName:       &data.ProductName,
 		ProductTypeName:   ptrString("Research and Development"),
-	}
-
-	// Debugging: print importScan details
-	fmt.Printf("ImportScan details: %+v\n", importScan)
-
-	// Use the Create method to import scan results
-	importedScan, err := dj.ImportScan.Create(cxt, importScan)
-	if err != nil {
-		// Print error details
-		fmt.Printf("Failed to import scan results: %v\n", err)
-	} else {
-		fmt.Printf("Scan results imported successfully: %+v\n", importedScan)
+		Version:           &data.version,
+		BuildId:           &data.github_buildId,
+		CommitHash:        &data.github_commitHash,
+		BranchTag:         &data.github_branchTag,
 	}
 }
 
-// Helper functions to create pointers
+func init() {
+	err := godotenv.Load(".env")
+	if err != nil {
+		log.Fatalf("Error loading .env file: %v\n", err)
+	}
+}
+
+func main() {
+
+	//File Path of Your report
+	//If you add Another Report You need to Add file path and also DataList
+	filename := os.Getenv("FILE_PATH_WITH_FILE_NAME")
+	filepath := files(filename)
+	product_name := os.Getenv("PRODUCT_NAME")
+
+	// Scan Type of the file
+	scantype := os.Getenv("SCAN_TYPE")
+
+	// Retrieve the github CI/CD environment variables
+	reponame := os.Getenv("GITHUB_REPOSITORY")
+	version := os.Getenv("GITHUB_RUN_NUMBER")
+	github_buildId := os.Getenv("GITHUB_RUN_ID")
+	github_commitHash := os.Getenv("GITHUB_SHA")
+	github_branchTag := os.Getenv("GITHUB_REF")
+
+	// User Auth
+	url := os.Getenv("DEFECTDOJO_URL")
+	authorizedToken := os.Getenv("DEFECTDOJO_TOKEN")
+	EngagementNamed := reponame + "_" + version
+
+	// Define multiple data structs
+	dataList := []datas{
+		{
+			filePath:          filepath,
+			EngagementName:    EngagementNamed,
+			ScanType:          scantype,
+			version:           version,
+			github_buildId:    github_buildId,
+			github_commitHash: github_commitHash,
+			github_branchTag:  github_branchTag,
+			ProductName:       product_name,
+		},
+	}
+
+	// Creating the Client
+	dj, err := defectdojo.NewDojoClient(url, authorizedToken, nil)
+	if err != nil {
+		log.Fatalf("Failed to create DefectDojo client: %v", err)
+	}
+
+	// Condition for failing the unwanted report upload.
+
+	fileuploadcondition := false
+
+	// Looping the Data
+	for _, data := range dataList {
+		// Check if the file exists
+		if _, err := os.Stat(data.filePath); os.IsNotExist(err) {
+			log.Fatalf("File does not exist: %v", err)
+			continue
+		}
+
+		fileuploadcondition = true
+		// Import the scan
+		scan := importscan(data)
+
+		// Use the Create method from the ImportScan service
+		_, err := dj.ImportScan.Create(context.Background(), &scan)
+		if err != nil {
+			// Print error details
+			fmt.Printf("Failed to import scan results for %s: %v\n", data.filePath, err)
+		}
+	}
+
+	// Give as Output if No file is founded.
+	if !fileuploadcondition {
+		fmt.Println("No file Path has not been Founded")
+	}
+
+}
+
 func ptrString(s string) *string {
 	return &s
 }
 
 func ptrBool(b bool) *bool {
 	return &b
-}
-
-func ptrInt(i int) *int {
-	return &i
 }
