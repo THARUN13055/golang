@@ -20,7 +20,7 @@ func main() {
 
 	fmt.Println("length is ", length)
 	defer file.Close()
-	readfile("./mylogo.txt")
+	readfile("./myfile.txt")
 
 }
 
@@ -30,6 +30,7 @@ func readfile(filename string) {
 
 	checkerror(err)
 	fmt.Println("text data inside the file is \n", databyte)
+	fmt.Println(string(databyte))
 
 }
 
